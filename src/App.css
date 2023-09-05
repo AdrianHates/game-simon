@@ -1,0 +1,86 @@
+:root {
+--c--violeta: purple;
+--c--rojo: red;
+--c--celeste: skyblue;
+--c--verde: green;
+--c--blanco: white;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body, #root {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#app {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  min-height: 100vh;
+  color: gold;
+  background-color: black;
+  border: 1px solid black;
+  & > div:first-of-type {
+    display: flex;
+    gap: 1rem;
+    & >  button {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      position: relative;
+      border: none;
+      &:focus {
+        outline: none ;
+      }
+      & img {
+        width: 100%;
+        position: absolute;
+        object-fit: contain;
+        top: 0;
+        left: 0;
+        padding: 1rem;
+        opacity: 0.7;
+      }
+    }
+  }
+  & > div:nth-of-type(2) {
+
+    & > img {
+      width: 100px;
+      object-fit: contain;
+    }
+  }
+}
+
+.opcion-1.activo {
+  background: linear-gradient(90deg, var(--c--rojo) 10%, var(--c--blanco) 50%, var(--c--rojo) 100%);
+
+  
+}
+
+.opcion-2.activo {
+
+  background: linear-gradient(90deg, var(--c--verde) 10%, var(--c--blanco) 50%, var(--c--verde) 100%);
+}
+
+.opcion-3.activo {
+  background: linear-gradient(90deg, var(--c--celeste) 10%, var(--c--blanco) 50%, var(--c--celeste) 100%);
+}
+
+.opcion-4.activo {
+  background: linear-gradient(90deg, var(--c--violeta) 10%, var(--c--blanco) 50%, var(--c--violeta) 100%);
+}
+
+
