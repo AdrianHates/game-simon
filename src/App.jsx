@@ -3,6 +3,7 @@ import './App.css'
 import crystal from './assets/crystal.png'
 import cueva from './assets/music/cueva.mp3'
 import loseMusic from './assets/music/derrota.mp3'
+import useAnimationBGI from './CustomHooks/useAnimationBGI'
 
 const casillas = [{
   name: 1,
@@ -30,6 +31,7 @@ const [cantidad, setCantidad] = useState(4)
 const [check, setCheck] = useState(0)
 const [turno, setTurno] = useState(null)
 const [on, setOn] = useState(true)
+const { result } = useAnimationBGI(59, 7, 0)
 
   const randomNumber = () => {
     const numero = Math.floor(Math.random() * cantidad)
@@ -137,9 +139,8 @@ console.log(turno)
         }
       </div>
       {/* Div del personaje en movimiento */}
-      <div id='personaje' className={turno===null?'movimiento':''} >
+      <div id='personaje' style={{backgroundPosition: `-${result}px 0px`}}>
       
-
       </div>
       {/*Audio*/}
       <div>

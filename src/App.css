@@ -28,10 +28,20 @@ body, #root {
   justify-content: center;
   flex-direction: column;
   gap: 2rem;
-  min-height: 100vh;
+  height: 100vh;
   color: gold;
-  background-color: black;
+  background-image: url("./assets/cave.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Fija la imagen de fondo al hacer scroll */
+  background-size: contain;
+
   border: 1px solid black;
+
+
+
+  background-position: -20px -70px;
+  background-size: 5900px 3450px;
+      
   & > h3 {
     margin-bottom: -1rem;
     font-style: italic;
@@ -64,28 +74,20 @@ body, #root {
   & 
 
     #personaje {
-      width: 56px;
-      height: 60px;
+      width: 60px;
+      border-radius: 0 50% 0 0;
+      height: 50px;
       background-image: url("./assets/personaje.png");
-      animation: sprite 1.25s steps(7) infinite;
       overflow: hidden;
-      transform: scale(2);
+      background-position: 0px 0px;
+      background-size: 421px 949px;
+
+      top: 0;
+      left: 0;
+      scale: 2;
     }
   
 }
-
-.movimiento {
-  animation: none !important;
-}
-
- @keyframes sprite {
-  0% {
-    background-position-x: 0;
-  }     
-  100% {
-    background-position-x: -412px;
-  }
- }
 
 .opcion-1.activo {
   background: linear-gradient(90deg, var(--c--rojo) 10%, var(--c--blanco) 50%, var(--c--rojo) 100%);
