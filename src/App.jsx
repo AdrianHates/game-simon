@@ -59,7 +59,7 @@ const TURNO = {
 function App() {
   const [prueba, setPrueba] = useState([]);
   const [activo, setActivo] = useState(null);
-  const [cantidad, setCantidad] = useState(4);
+  const [cantidad] = useState(4);
   const [check, setCheck] = useState(0);
   const [turno, setTurno] = useState(null);
   const [isOnRed, setIsOnRed] = useState(0);
@@ -81,7 +81,7 @@ function App() {
     if (seleccionado !== prueba[check]) {
       musicStop();
       derrota();
-      alert("perdiste pe causa");
+      alert("Game Over");
       setPrueba([]);
       setActivo(null);
       setCheck(0);
@@ -156,7 +156,7 @@ function App() {
   return (
     <div id="app">
       <h1>Changomon</h1>
-      <h3>Estado:</h3>
+      <h3>State:</h3>
       <p
         style={{
           fontWeight: "1000",
@@ -197,7 +197,9 @@ function App() {
 
       <div
         id="personaje"
-        style={{ backgroundPosition: `-1px -${2 + result}px` }}
+        style={{
+          backgroundPosition: `-1px -${2 + (turno === null ? 0 : result)}px`,
+        }}
       />
       {/*Audio*/}
       <div>
