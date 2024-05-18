@@ -27,6 +27,7 @@ body, #root {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
   gap: 2rem;
   height: 600px;
   color: gold;
@@ -73,16 +74,14 @@ body, #root {
   & 
 
     #personaje {
-      width: 60px;
-      border-radius: 0 50% 0 0;
-      height: 50px;
-      background-image: url("./assets/personaje.png");
-      overflow: hidden;
-      background-position: 0px 0px;
-      background-size: 421px 949px;
-
-      top: 0;
-      left: 0;
+      width: 80px;
+      height: 33px;
+      background-image: url("/new-pjs.png");
+      position: absolute;
+      background-size: 88px 147px;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       scale: 2;
     }
   

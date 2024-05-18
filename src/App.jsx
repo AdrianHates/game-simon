@@ -64,7 +64,7 @@ function App() {
   const [turno, setTurno] = useState(null);
   const [isOnRed, setIsOnRed] = useState(0);
   const [on, setOn] = useState(true);
-  const { result } = useAnimationBGI(59, 7, 0);
+  const { result } = useAnimationBGI(36, 2, 0);
   const randomNumber = () => {
     const numero = Math.floor(Math.random() * cantidad);
     return numero;
@@ -197,15 +197,16 @@ function App() {
 
       <div
         id="personaje"
-        style={{ backgroundPosition: `-${result}px 0px` }}
-      ></div>
+        style={{ backgroundPosition: `-1px -${2 + result}px` }}
+      />
       {/*Audio*/}
       <div>
         <audio id="audio" src={cueva} loop />
         <audio id="derrota" src={loseMusic} />
       </div>
       <button
-        disabled={prueba.length === 0 ? false : true}        
+        style={{ display: turno === null ? "block" : "none" }}
+        disabled={prueba.length === 0 ? false : true}
         onClick={() => {
           musicPlay();
           setTurno(TURNO[1]);
