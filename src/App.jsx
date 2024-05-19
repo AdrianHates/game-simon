@@ -3,6 +3,7 @@ import "./App.css";
 import cueva from "./assets/music/cueva.mp3";
 import loseMusic from "./assets/music/derrota.mp3";
 import useAnimationBGI from "./CustomHooks/useAnimationBGI";
+import Modal from "./components/modal";
 
 const casillas = [
   {
@@ -19,7 +20,7 @@ const casillas = [
   {
     name: 2,
     audio: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3",
-    top: "0px",
+    top: "20px",
     width: "155px",
     height: "127px",
     left: "260px",
@@ -44,7 +45,7 @@ const casillas = [
     top: "210px",
     width: "175px",
     height: "117px",
-    left: "260px",
+    left: "240px",
     backgroundPositionX: 407,
     backgroundPositionY: 73,
     phase: 117,
@@ -64,6 +65,7 @@ function App() {
   const [turno, setTurno] = useState(null);
   const [isOnRed, setIsOnRed] = useState(0);
   const [on, setOn] = useState(true);
+  const [gameOver, setGameOver] = useState(false)
   const { result } = useAnimationBGI(36, 2, 0);
   const randomNumber = () => {
     const numero = Math.floor(Math.random() * cantidad);
@@ -81,7 +83,7 @@ function App() {
     if (seleccionado !== prueba[check]) {
       musicStop();
       derrota();
-      alert("Game Over");
+      setGameOver(true)
       setPrueba([]);
       setActivo(null);
       setCheck(0);
@@ -160,16 +162,15 @@ function App() {
       <p
         style={{
           fontWeight: "1000",
-          fontSize: "1.5rem",
           color: `${
-            turno === 1 ? "skyblue" : turno === 0 ? "#50C878" : "gray"
+            turno === 1 ? "#d0e8ea" : turno === 0 ? "#ec202d" : "gray"
           }`,
         }}
       >
         {turno === 1
-          ? "Secuencia"
+          ? "Sequence"
           : turno === 0
-          ? "Presiona la secuencia"
+          ? "Press the button"
           : "Off"}
       </p>
 
@@ -206,16 +207,22 @@ function App() {
         <audio id="audio" src={cueva} loop />
         <audio id="derrota" src={loseMusic} />
       </div>
-      <button
-        style={{ display: turno === null ? "block" : "none" }}
-        disabled={prueba.length === 0 ? false : true}
-        onClick={() => {
-          musicPlay();
-          setTurno(TURNO[1]);
-        }}
-      >
-        Start!
-      </button>
+      {turno === null && (
+        <Modal>
+          {
+            gameOver && <img src='/game-over.png'/>
+          }
+          <button
+          disabled={prueba.length === 0 ? false : true}
+          onClick={() => {
+            musicPlay();
+            setTurno(TURNO[1]);
+          }}
+        >
+          Start!
+        </button>
+        </Modal>
+      )}
     </div>
   );
 }

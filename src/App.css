@@ -1,9 +1,9 @@
 :root {
---c--violeta: purple;
---c--rojo: red;
---c--celeste: skyblue;
---c--verde: green;
---c--blanco: white;
+  --c--violeta: purple;
+  --c--rojo: red;
+  --c--celeste: skyblue;
+  --c--verde: green;
+  --c--blanco: white;
 }
 
 * {
@@ -12,12 +12,14 @@
   box-sizing: border-box;
 }
 
-body, #root {
+body,
+#root {
   min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: black;
 }
 
 #app {
@@ -28,18 +30,26 @@ body, #root {
   justify-content: center;
   flex-direction: column;
   position: relative;
-  gap: 2rem;
+  gap: 20px;
   height: 600px;
-  color: gold;
   background-image: url("/cave.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   margin: 0 auto;
+  & > h1 {
+    font-family: "Jungle Fever", sans-serif;
+    font-size: 60px;
+    line-height: 1;
+    color: #ffcf46;
+  }
   & > h3 {
-    margin-bottom: -1rem;
-    font-style: italic;
-    color: azure
+    font-family: "Jungle Fever", sans-serif;
+    color: azure;
+  }
+  & > p {
+    font-family: "Jungle Fever", sans-serif;
+    font-size: 30px;
   }
   & > div:first-of-type {
     display: flex;
@@ -47,18 +57,17 @@ body, #root {
     gap: 1rem;
     width: 100%;
     height: 100%;
-    & >  
-      div {
-        cursor: pointer;
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        background-image: url("/no-bg-sprite.png");
-        background-repeat: no-repeat;
-        background-size: 1152px 540px;
-      
+    & > div {
+      cursor: pointer;
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background-image: url("/no-bg-sprite.png");
+      background-repeat: no-repeat;
+      background-size: 1152px 540px;
+
       &:focus {
-        outline: none ;
+        outline: none;
       }
       & img {
         width: 100%;
@@ -71,22 +80,49 @@ body, #root {
       }
     }
   }
-  & 
-
-    #personaje {
-      width: 80px;
-      height: 33px;
-      background-image: url("/new-pjs.png");
-      position: absolute;
-      background-size: 88px 147px;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      scale: 2;
-    }
-  
+  & #personaje {
+    width: 80px;
+    height: 33px;
+    background-image: url("/new-pjs.png");
+    position: absolute;
+    background-size: 88px 147px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    scale: 2;
+  }
 }
 
+.modal {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  height: 100%;
+  max-height: 100vh;
+  width: 100%;
+  place-items: center;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  & img {
+    width: 680px;
+    height: 615px;
+    object-fit: cover;
+    animation: opacity 2s;
+  }
+}
 
-
-
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+  
+}
