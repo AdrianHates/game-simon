@@ -210,7 +210,7 @@ function App() {
       {turno === null && (
         <Modal>
           {
-            gameOver && <img src='game-simon/game-over.png'/>
+            gameOver && <img src='/game-simon/game-over.png'/>
           }
           <button
           disabled={prueba.length === 0 ? false : true}
