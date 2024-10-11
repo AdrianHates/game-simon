@@ -23,7 +23,7 @@ const ScoreBoard = ({ score }) => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     const sprite = new Image();
-    sprite.src = "/number-score.png";
+    sprite.src = `${import.meta.env.BASE_URL}number-score.png`;
 
     sprite.onload = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
