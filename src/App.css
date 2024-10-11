@@ -118,6 +118,46 @@ body,
   }
 }
 
+.button-start {
+  font-family: "Jungle Fever", sans-serif;
+  position: absolute;
+  z-index: 0;
+  animation: opacity 2s;
+  cursor: pointer;
+  transition: all 300ms ease-out;
+  &:hover {
+    scale: 1.1;
+    filter: brightness(125%);
+  }
+  & img {
+    filter: drop-shadow(0px 0px 2px white);
+    border-radius: 20px;
+    width: 77px;
+    height: 27px;
+    object-fit: contain;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+  }
+}
+
+.scoreboard {
+  position: absolute;
+  background-color: black;
+  border: 1px solid brown;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 1px brown;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  padding: 10px;
+  & canvas {
+    background-color: white;
+  }
+}
+
 @keyframes opacity {
   0% {
     opacity: 0;
@@ -125,5 +165,4 @@ body,
   100% {
     opacity: 1;
   }
-  
 }

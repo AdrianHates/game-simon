@@ -4,6 +4,7 @@ import cueva from "./assets/music/cueva.mp3";
 import loseMusic from "./assets/music/derrota.mp3";
 import useAnimationBGI from "./CustomHooks/useAnimationBGI";
 import Modal from "./components/modal";
+import ScoreBoard from "./components/scoreboard";
 
 const casillas = [
   {
@@ -63,9 +64,9 @@ function App() {
   const [cantidad] = useState(4);
   const [check, setCheck] = useState(0);
   const [turno, setTurno] = useState(null);
-  const [isOnRed, setIsOnRed] = useState(0);
   const [on, setOn] = useState(true);
-  const [gameOver, setGameOver] = useState(false)
+  const [gameOver, setGameOver] = useState(false);
+  const [score, setScore] = useState(0);
   const { result } = useAnimationBGI(36, 2, 0);
   const randomNumber = () => {
     const numero = Math.floor(Math.random() * cantidad);
@@ -80,14 +81,16 @@ function App() {
   const verificarSecuencia = (event) => {
     if (turno === TURNO[1] || turno === null) return;
     const seleccionado = Number(event.currentTarget.dataset.id);
+
     if (seleccionado !== prueba[check]) {
       musicStop();
       derrota();
-      setGameOver(true)
+      setGameOver(true);
       setPrueba([]);
       setActivo(null);
       setCheck(0);
       setTurno(null);
+      setScore(0);
       return;
     }
     setActivo(seleccionado);
@@ -96,6 +99,7 @@ function App() {
       setCheck(0);
       setTimeout(() => {
         setTurno(TURNO[1]);
+        setScore((prevState) => prevState + 1);
       }, 1500);
       return;
     }
@@ -132,14 +136,6 @@ function App() {
     }, 1000);
   }, [turno]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (isOnRed === 0) {
-        setIsOnRed(1);
-      }
-    }, 1000);
-  }, [isOnRed]);
-
   const musicPlay = () => {
     const music = document.querySelector("#audio");
     music.play();
@@ -167,11 +163,7 @@ function App() {
           }`,
         }}
       >
-        {turno === 1
-          ? "Sequence"
-          : turno === 0
-          ? "Press the button"
-          : "Off"}
+        {turno === 1 ? "Sequence" : turno === 0 ? "Press the button" : "Off"}
       </p>
 
       <div>
@@ -195,7 +187,7 @@ function App() {
           </div>
         ))}
       </div>
-
+      <ScoreBoard score={score} />
       <div
         id="personaje"
         style={{
@@ -209,18 +201,18 @@ function App() {
       </div>
       {turno === null && (
         <Modal>
-          {
-            gameOver && <img src='/game-simon/game-over.png'/>
-          }
-          <button
-          disabled={prueba.length === 0 ? false : true}
-          onClick={() => {
-            musicPlay();
-            setTurno(TURNO[1]);
-          }}
-        >
-          Start!
-        </button>
+          {gameOver && <img src="/game-simon/game-over.png" />}
+          <div
+            className="button-start"
+            disabled={prueba.length === 0 ? false : true}
+            onClick={() => {
+              musicPlay();
+              setTurno(TURNO[1]);
+            }}
+          >
+            Start!
+            <img src="/game-simon/wood.png" />
+          </div>
         </Modal>
       )}
     </div>
