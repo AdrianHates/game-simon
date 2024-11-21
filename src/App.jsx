@@ -69,17 +69,40 @@ function App() {
   const [score, setScore] = useState(0);
   const { result } = useAnimationBGI(36, 2, 0);
   const [volume, setVolume] = useState(0.5);
+  const [isMuted, setIsMuted] = useState(false);
+
   const audioRef = useRef(null);
   const derrotaRef = useRef(null);
 
-  const handleVolumeChange = (event) => {
-    const newVolume = event.target.value;
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+    if (isMuted) {
+      if (audioRef.current) {
+        audioRef.current.volume = volume;
+      }
+      if (derrotaRef.current) {
+        derrotaRef.current.volume = volume;
+      }
+    } else {
+      if (audioRef.current) {
+        audioRef.current.volume = 0;
+      }
+      if (derrotaRef.current) {
+        derrotaRef.current.volume = 0;
+      }
     }
-    if (derrotaRef.current) {
-      derrotaRef.current.volume = newVolume;
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = e.target.value;
+    setVolume(newVolume);
+    if (!isMuted) {
+      if (audioRef.current) {
+        audioRef.current.volume = newVolume;
+      }
+      if (derrotaRef.current) {
+        derrotaRef.current.volume = newVolume;
+      }
     }
   };
 
@@ -215,8 +238,40 @@ function App() {
         <audio id="audio" ref={audioRef} src={cueva} loop />
         <audio id="derrota" ref={derrotaRef} src={loseMusic} />
         <div className="volumen">
+          <button onClick={toggleMute} className="mute-button">
+            {isMuted ? (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M3 10V14H7L12 19V5L7 10H3Z" fill="#888" />
+                <line
+                  x1="18"
+                  y1="6"
+                  x2="6"
+                  y2="18"
+                  stroke="#888"
+                  strokeWidth="2"
+                />
+              </svg>
+            ) : (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M3 10V14H7L12 19V5L7 10H3Z" fill="#888" />
+              </svg>
+            )}
+            Mute
+          </button>
           <label htmlFor="volume">
-            Volumen <p>{(volume * 100).toFixed(0)}%</p>
+            Volumen <p>{(volume * 100).toFixed(0)}%</p>{" "}
           </label>
           <input
             type="range"
@@ -224,7 +279,7 @@ function App() {
             min="0"
             max="1"
             step="0.01"
-            value={volume}
+            value={isMuted ? 0 : volume}
             onChange={handleVolumeChange} // Llama a la función cuando cambia el volumen
           />
           {/* Muestra el porcentaje del volumen */}

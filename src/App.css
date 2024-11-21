@@ -172,11 +172,26 @@ body,
   & label {
     position: absolute;
     bottom: 0;
-    transform: translate(90%, -30%) rotate(-90deg);
+    transform: translate(100%, -30%) rotate(-90deg);
     transform-origin: left;
     display: flex;
     justify-content: space-between;
-    width: 90%;
+    width: 85%;
+  }
+}
+
+.mute-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  transform: translate(50%, 50%);
+  color: #888;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 8px;
+  &:hover {
+    background-color: rgba(136, 101, 101, 0.6);
   }
 }
 
