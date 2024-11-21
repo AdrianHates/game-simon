@@ -24,6 +24,7 @@ body,
 
 #app {
   text-align: center;
+  min-width: 680px;
   width: 680px;
   display: flex;
   align-items: center;
@@ -155,6 +156,27 @@ body,
   padding: 10px;
   & canvas {
     background-color: white;
+  }
+}
+
+.volumen {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: #888;
+  & input {
+    transform: translate(100%, 0%) rotate(-90deg);
+    transform-origin: left;
+    cursor: pointer;
+  }
+  & label {
+    position: absolute;
+    bottom: 0;
+    transform: translate(90%, -30%) rotate(-90deg);
+    transform-origin: left;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
   }
 }
 

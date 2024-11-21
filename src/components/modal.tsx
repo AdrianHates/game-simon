@@ -12,8 +12,8 @@ const Modal = ({ isOpen, children, onClose, zIndex }: Props) => {
   return createPortal(
     <div
       className="modal"
-      animate={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
-      exit={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+      //animate={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
+      //exit={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
     >
       <div
         onClick={onClose}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import cueva from "./assets/music/cueva.mp3";
 import loseMusic from "./assets/music/derrota.mp3";
@@ -68,6 +68,21 @@ function App() {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const { result } = useAnimationBGI(36, 2, 0);
+  const [volume, setVolume] = useState(0.5);
+  const audioRef = useRef(null);
+  const derrotaRef = useRef(null);
+
+  const handleVolumeChange = (event) => {
+    const newVolume = event.target.value;
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+    if (derrotaRef.current) {
+      derrotaRef.current.volume = newVolume;
+    }
+  };
+
   const randomNumber = () => {
     const numero = Math.floor(Math.random() * cantidad);
     return numero;
@@ -151,6 +166,7 @@ function App() {
     const lose = document.querySelector("#derrota");
     lose.play();
   };
+
   return (
     <div id="app">
       <h1>Changomon</h1>
@@ -196,8 +212,23 @@ function App() {
       />
       {/*Audio*/}
       <div>
-        <audio id="audio" src={cueva} loop />
-        <audio id="derrota" src={loseMusic} />
+        <audio id="audio" ref={audioRef} src={cueva} loop />
+        <audio id="derrota" ref={derrotaRef} src={loseMusic} />
+        <div className="volumen">
+          <label htmlFor="volume">
+            Volumen <p>{(volume * 100).toFixed(0)}%</p>
+          </label>
+          <input
+            type="range"
+            id="volume"
+            min="0"
+            max="1"
+            step="0.01"
+            value={volume}
+            onChange={handleVolumeChange} // Llama a la función cuando cambia el volumen
+          />
+          {/* Muestra el porcentaje del volumen */}
+        </div>
       </div>
       {turno === null && (
         <Modal>
